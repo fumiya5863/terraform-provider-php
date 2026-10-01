@@ -1,0 +1,41 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+
+/**
+ * Terraform が子プロセスとして起動する本体。
+ *
+ * 守らなければならない作法:
+ *   1. ハンドシェイク行より前に、何ひとつ標準出力へ書いてはいけない
+ *   2. 書いたら即 flush する（Terraform はこの1行を読むまでブロックする）
+ *   3. ラッパースクリプトを噛ませない。Terraform は直接の子プロセスしか
+ *      終了させられず、シェル経由にすると PHP が孤児として残り、
+ *      Terraform が終了を待ち続けて固まる
+ *      → そのため shebang で php を直接起動している
+ *      （env php を使うので、PATH 上の php が Swoole 付き 8.4 系である必要がある）
+ */
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use PhpTf\Grpc\SwooleServer;
+use PhpTf\Plugin\Handshake;
+
+// 直接実行された場合に人間へ知らせる。
+// go-plugin 曰く "This is not a security measure, just a UX feature."
+if (Handshake::looksLikeDirectExecution()) {
+    fwrite(STDERR, "これは Terraform のプラグインです。直接実行するものではありません。\n");
+    exit(1);
+}
+
+if (!extension_loaded('swoole')) {
+    fwrite(STDERR, "swoole 拡張が必要です\n");
+    exit(1);
+}
+
+$host = '127.0.0.1';
+$server = new SwooleServer()->create($host, 0);
+
+// ポートは bind 後に確定する。start() の前に出さないと Terraform が待ち続ける。
+Handshake::announce('tcp', "{$host}:{$server->port}");
+
+$server->start();

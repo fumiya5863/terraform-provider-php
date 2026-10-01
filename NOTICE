@@ -1,0 +1,18 @@
+# サードパーティのファイルについて
+
+## proto/tfplugin6.proto
+
+HashiCorp の Terraform リポジトリから取得したもの。
+ファイル自身のヘッダが次のように再利用を明示的に許可している。
+
+> To implement a plugin against this protocol, copy this definition into your
+> own codebase and use protoc to generate stubs for your target language.
+
+出典: https://github.com/hashicorp/terraform/blob/main/docs/plugin-protocol/tfplugin6.proto
+
+## proto/health.proto
+
+gRPC の grpc-proto リポジトリから取得したもの（Apache License 2.0）。
+ファイル内にライセンス表記が含まれている。
+
+出典: https://github.com/grpc/grpc-proto/blob/master/grpc/health/v1/health.proto

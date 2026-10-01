@@ -1,0 +1,23 @@
+# Composer
+/vendor/
+
+# protoc が生成するスタブ（make proto で再生成する）
+/gen/
+
+# 一次資料（make docs で取得する。再配布しないため追跡しない）
+/docs/
+
+# Terraform の作業ファイル
+**/.terraform/
+**/.terraform.lock.hcl
+**/terraform.tfstate
+**/terraform.tfstate.backup
+**/crash.log
+
+# 実行時に生成されるもの
+/.reattach.json
+/dev/terraformrc
+/examples/*/out/
+
+# OS
+.DS_Store
