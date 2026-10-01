@@ -114,7 +114,7 @@ foreach (['長さ超過' => "\xa5ab", '未知ヘッダ' => "\xc1", '途中切れ
     catch (\Throwable $e) { ok("{$label} は RuntimeException", false, get_class($e)); }
 }
 
-echo "\n[I] gRPC 框化\n";
+echo "\n[I] gRPC フレーミング\n";
 $f = \PhpTf\Grpc\Frame::wrap('abc');
 ok('wrap は 1+4+本体', $f === "\x00\x00\x00\x00\x03abc", 'hex: ' . hex($f));
 ok('unwrap 往復', \PhpTf\Grpc\Frame::unwrap($f) === ['abc']);

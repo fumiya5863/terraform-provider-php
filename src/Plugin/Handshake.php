@@ -16,7 +16,7 @@ namespace PhpTf\Plugin;
  * 落とし穴:
  *   - CORE は 1 固定。他の値を出すとロードに失敗する
  *   - 証明書の base64 は「パディング禁止」。Rust/Python/C# の実装が全て独立に踏んでいる
- *   - この1行より前に何か出力したら即死する（ログを混ぜてはいけない）
+ *   - この1行より前に何か出力すると、Terraform がプラグインを認識できなくなる
  */
 final class Handshake
 {

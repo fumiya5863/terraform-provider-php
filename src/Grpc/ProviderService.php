@@ -38,7 +38,7 @@ final class ProviderService
 
     /**
      * @param string $path "/tfplugin6.Provider/GetProviderSchema" 形式
-     * @param string $request protobuf バイト列（gRPC 框を外したもの）
+     * @param string $request protobuf バイト列（gRPC のフレームを外したもの）
      * @return string protobuf バイト列
      */
     public function handle(string $path, string $request): string

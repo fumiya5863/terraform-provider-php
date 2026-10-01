@@ -106,7 +106,7 @@ chmod($locked, 0o755);
 ok('削除に失敗したら例外にする（state だけ消えるのを防ぐ）', $threw,
    '握りつぶすと Terraform は state からリソースを消すのに実体が残る');
 
-echo "\n[6] gRPC 框化の回帰\n";
+echo "\n[6] gRPC フレーミングの回帰\n";
 $threw = false;
 try { Frame::unwrap(Frame::wrap('abc') . "\x00\x00\x00"); }
 catch (\RuntimeException $e) { $threw = true; }

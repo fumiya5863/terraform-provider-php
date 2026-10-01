@@ -37,7 +37,7 @@ final class SwooleServer
 
         $server->set([
             'open_http2_protocol' => true,
-            // 標準出力はハンドシェイク専用。ログを混ぜると Terraform が即座に死ぬ。
+            // 標準出力はハンドシェイク専用。ログを混ぜると認識に失敗する。
             'log_level' => SWOOLE_LOG_ERROR,
             'log_file'  => getenv('TFPHP_LOG_FILE') ?: '/dev/null',
             'worker_num' => 1,

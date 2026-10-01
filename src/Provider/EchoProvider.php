@@ -12,7 +12,7 @@ use PhpTf\Cty\Value;
  *
  * 自作の msgpack / cty 実装が「自分同士で往復できる」ことは、
  * 仕様に従っている証明にならない（トートロジー）。
- * そこで Terraform 本体の cty 実装に実際に食わせ、
+ * そこで Terraform 本体の cty 実装に実際に渡し、
  * 設定した値がそのまま返ってくるかで相互運用性を検証する。
  */
 final class EchoProvider

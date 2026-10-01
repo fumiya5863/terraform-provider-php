@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace PhpTf\Grpc;
 
 /**
- * gRPC の「長さ前置きメッセージ」框化。
+ * gRPC の「長さ前置きメッセージ」のフレーミング。
  *
  * HTTP/2 の DATA フレームの中身は、protobuf をそのまま流すのではなく
  * 1バイトの圧縮フラグ + 4バイトのビッグエンディアン長 + 本体 という形を取る。
